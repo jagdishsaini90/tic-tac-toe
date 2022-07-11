@@ -8,6 +8,13 @@
 .user {
   max-width: 20%;
   margin-top: 50px;
+  font-weight: bold;
+}
+
+.user:nth-child(1) {
+  h1:nth-child(2) {
+    display: none;
+  }
 }
 
 .gameTop {
@@ -131,5 +138,43 @@
   }
   100% {
     background-position: 0 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .resetButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .tictacButton {
+    min-width: 100px;
+    min-height: 100px;
+  }
+
+  .gameContainer {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hideMobileUser {
+    display: none;
+  }
+  .gameTop {
+    width: 100%;
+  }
+
+  .user:nth-child(1) {
+    max-width: 0;
+    display: flex;
+    min-width: 100vw;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+
+    h1 {
+      font-size: 30px;
+    }
   }
 }

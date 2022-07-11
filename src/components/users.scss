@@ -8,7 +8,30 @@
     font-size: 1.5rem;
   }
 
+  input {
+    font-size: medium;
+    font-weight: 500;
+  }
+
   .userForm {
     border-radius: 10px;
+  }
+
+  button {
+    width: 50%;
+    margin: auto;
+    height: 60px;
+    font-size: 2em;
+    border-radius: 10px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .usersCont {
+    min-width: 90vw;
+
+    .userForm {
+      padding: 30px 20px;
+    }
   }
 }

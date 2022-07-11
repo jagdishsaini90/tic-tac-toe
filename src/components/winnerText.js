@@ -4,7 +4,7 @@ import "./winnerText.scss";
 const WinnerText = ({ user }) => {
   return (
     <div className="winnerTextCont">
-      <h1 className="winnerText" contenteditable spellCheck="false">
+      <h1 className="winnerText" contentEditable spellCheck="false">
         Hurray! <span>{user}</span>
       </h1>
     </div>

@@ -44,9 +44,9 @@ export default function UserDetails({ setShow, users, setUsers }) {
               }
             />
           </div>
-          <div className="flex items-center justify-between">
+          <div className="w-full flex items-center justify-between">
             <button
-              className="bg-purple hover:bg-metal text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="w-50 bg-purple hover:bg-metal text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
               disabled={users.person1 && users.person2 ? false : true}
               onClick={() => {

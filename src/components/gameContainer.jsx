@@ -16,7 +16,7 @@ const DefaultValues = {
   nine: "",
 };
 
-const GameContainer = ({ users }) => {
+const GameContainer = ({ users, setColor }) => {
   const [values, setValues] = useState(DefaultValues);
   const [sign, setSign] = useState("O");
   const [winner, setWinner] = useState("");
@@ -28,12 +28,17 @@ const GameContainer = ({ users }) => {
       [name]: sign,
     }));
     setSign((prev) => (prev === "O" ? "X" : "O"));
+    setColor((prev) => {
+      return { ...prev, p: prev.p === 1 ? 2 : 1 };
+    });
   };
 
   useEffect(() => {
     const val = CheckCombination(values);
     if (val) {
-      setWinner(() => (val === 1 ? users.person1 : users.person2));
+      setTimeout(() => {
+        setWinner(() => (val === 1 ? users.person1 : users.person2));
+      }, 1000);
       return;
     }
   }, [values, users]);
@@ -59,7 +64,7 @@ const GameContainer = ({ users }) => {
       {winner && <Winner />}
       <div>{winner && <WinnerText user={winner} />}</div>
       {!winner ? (
-        <div>
+        <div className="resetButton">
           <button
             onClick={() => {
               setValues(DefaultValues);
