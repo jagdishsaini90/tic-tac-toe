@@ -68,6 +68,7 @@ const GameContainer = ({ users, setColor }) => {
           <button
             onClick={() => {
               setValues(DefaultValues);
+              setSign("O");
             }}
             className="glow-on-hover"
           >
