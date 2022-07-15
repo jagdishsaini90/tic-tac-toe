@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Button from "./button";
 import { CheckCombination } from "./helper";
-import { Winner } from "./winner";
-import WinnerText from "./winnerText";
+import { useNavigate } from "react-router-dom";
 
 const DefaultValues = {
   one: "",
@@ -19,7 +18,7 @@ const DefaultValues = {
 const GameContainer = ({ users, setColor }) => {
   const [values, setValues] = useState(DefaultValues);
   const [sign, setSign] = useState("O");
-  const [winner, setWinner] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -37,14 +36,14 @@ const GameContainer = ({ users, setColor }) => {
     const val = CheckCombination(values);
     if (val) {
       setTimeout(() => {
-        setWinner(() => (val === 1 ? users.person1 : users.person2));
+        navigate(`/winner/${val === 1 ? users.person1 : users.person2}`);
       }, 1000);
       return;
     }
-  }, [values, users]);
+  }, [values, users, navigate]);
   return (
     <div className="gameTop">
-      <div className="container tictacContainer sm-auto">
+      <div className="container tictacContainer">
         <div className="tictacRow">
           <Button handleChange={handleChange} name="one" one={values.one} />
           <Button handleChange={handleChange} name="two" one={values.two} />
@@ -61,30 +60,29 @@ const GameContainer = ({ users, setColor }) => {
           <Button handleChange={handleChange} name="nine" one={values.nine} />
         </div>
       </div>
-      {winner && <Winner />}
-      <div>{winner && <WinnerText user={winner} />}</div>
-      {!winner ? (
-        <div className="resetButton">
-          <button
-            onClick={() => {
-              setValues(DefaultValues);
-              setSign("O");
-            }}
-            className="glow-on-hover"
-          >
-            Reset
-          </button>
-          <button
-            onClick={() => {
-              localStorage.removeItem("users");
-              window.location.reload();
-            }}
-            className="glow-on-hover"
-          >
-            Restart
-          </button>
-        </div>
-      ) : null}
+      <div className="resetButton">
+        <button
+          onClick={() => {
+            setValues(DefaultValues);
+            setSign("O");
+            setColor((prev) => {
+              return { ...prev, p: 1 };
+            });
+          }}
+          className="glow-on-hover"
+        >
+          Reset
+        </button>
+        <button
+          onClick={() => {
+            localStorage.removeItem("users");
+            navigate("/");
+          }}
+          className="glow-on-hover"
+        >
+          Restart
+        </button>
+      </div>
     </div>
   );
 };

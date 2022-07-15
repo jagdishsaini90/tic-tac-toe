@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./users.scss";
 
-export default function UserDetails({ setShow, users, setUsers }) {
+export default function UserDetails() {
+  const users_data = JSON.parse(localStorage.getItem("users"));
+  const navigate = useNavigate();
+  const [users, setUsers] = useState(
+    users_data
+      ? users_data
+      : {
+          person1: "",
+          person2: "",
+        }
+  );
   return (
     <>
       <div className="usersCont max-w-xs">
@@ -51,7 +62,7 @@ export default function UserDetails({ setShow, users, setUsers }) {
               disabled={users.person1 && users.person2 ? false : true}
               onClick={() => {
                 localStorage.setItem("users", JSON.stringify(users));
-                setShow(true);
+                navigate("/dashboard");
               }}
             >
               Let's Go
